@@ -1,0 +1,26 @@
+plugins {
+    id 'org.spongepowered.plugin' version '0.9.0'
+}
+
+group = 'xyz.n7mn.dev.sponge'
+version = '1.0'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+tasks.withType(AbstractCompile)*.options*.encoding = tasks.withType(GroovyCompile)*.groovyOptions*.encoding = 'UTF-8'
+
+
+dependencies {
+    compileOnly 'org.spongepowered:spongeapi:7.0.0'
+    annotationProcessor 'org.spongepowered:spongeapi:7.0.0'
+    compile 'com.squareup.okhttp3:okhttp:4.8.0'
+    compile 'com.ibm.icu:icu4j:67.1'
+}
+
+//sponge.plugin.id = 'ChatPlugin-Sponge'
+import org.apache.tools.ant.filters.ReplaceTokens
+
+jar {
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+}
